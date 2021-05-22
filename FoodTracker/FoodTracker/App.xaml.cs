@@ -11,7 +11,7 @@ namespace FoodTracker
         {
             InitializeComponent();
 
-            MainPage = new AddView();
+            MainPage = new NavigationPage(new MainPage()) ;
         }
 
         protected override void OnStart()
