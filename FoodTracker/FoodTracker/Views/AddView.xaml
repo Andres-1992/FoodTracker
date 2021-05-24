@@ -31,10 +31,10 @@
                 </Grid.RowDefinitions >
 
             <Entry Placeholder="EAN" Text="{Binding Item.ean,Mode=OneWayToSource}" Grid.Column="5" Grid.Row="1" ClearButtonVisibility="WhileEditing"/>
-                <Button Clicked="Button_Clicked" Text="Scan" Grid.Column="1" Grid.Row="1"/>
-                <zxing:ZXingScannerView x:Name="Scanner" IsScanning="True" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5" />
+            <ImageButton  Source="@android:drawable/camera2" Command="{Binding ToggleScannerCommand}"  Grid.Column="2" HeightRequest="40" WidthRequest="40"   Grid.Row="1"/>
+            <zxing:ZXingScannerView x:Name="Scanner" IsVisible="{Binding ScannerToggled,Mode=TwoWay}"  IsScanning="True" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5" />
 
-                <ScrollView Grid.Row="4"  Grid.Column="1" Grid.ColumnSpan="5">
+            <ScrollView Grid.Row="4"  Grid.Column="1" Grid.ColumnSpan="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="15"/>
@@ -71,28 +71,32 @@
                     <Entry Placeholder="Brand" Text="{Binding Item.brand}" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
                     <Entry Placeholder="Energy" Text="{Binding Item.energy,Mode=OneWayToSource}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
                     <Entry Placeholder="Carbs" Text="{Binding Item.carbs,Mode=OneWayToSource}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Sodium" Text="{Binding Item.sodium,Mode=OneWayToSource}" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Fat" Text="{Binding Item.fat,Mode=OneWayToSource}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Saturated fat" Text="{Binding Item.satfat,Mode=OneWayToSource}" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Salt" Text="{Binding Item.salt,Mode=OneWayToSource}" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Sugar" Text="{Binding Item.sugar,Mode=OneWayToSource}" Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
+                    <Entry Placeholder="Protein" Text="{Binding Item.protein,Mode=OneWayToSource}" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
+                    <Entry Placeholder="Sodium" Text="{Binding Item.sodium,Mode=OneWayToSource}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
+                    <Entry Placeholder="Fat" Text="{Binding Item.fat,Mode=OneWayToSource}" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
+                    <Entry Placeholder="Saturated fat" Text="{Binding Item.satfat,Mode=OneWayToSource}" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
+                    <Entry Placeholder="Salt" Text="{Binding Item.salt,Mode=OneWayToSource}" Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
+                    <Entry Placeholder="Sugar" Text="{Binding Item.sugar,Mode=OneWayToSource}" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
 
-                        <Label  Grid.Column="2" Grid.Row="10" Text="Organic"  VerticalOptions="Center" />
-                    <CheckBox  IsChecked="{Binding Item.organic}" Grid.Column="3" Grid.Row="10" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Grid.Row="11" Text="Fairtrade" VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.fairtrade}" Grid.Column="3" Grid.Row="11" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Grid.Row="12" Text="Eco"  VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.eco}" Grid.Column="3" Grid.Row="12" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Grid.Row="13" Text="Vegetarian"  VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.vegetarian}" Grid.Column="3" Grid.Row="13" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Grid.Row="14" Text="Vegan"  VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.vegan}" Grid.Column="3" Grid.Row="14" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Entry Placeholder="healthnotes" Text="{Binding Item.healthnotes}" Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="5"/>
-                    </Grid>
-                </ScrollView>
+                        <Label  Grid.Column="2" Grid.Row="11" Text="Organic"  VerticalOptions="Center" />
+                    <CheckBox  IsChecked="{Binding Item.organic}" Grid.Column="3" Grid.Row="11" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+                        <Label Grid.Column="2" Grid.Row="12" Text="Fairtrade" VerticalOptions="Center"/>
+                    <CheckBox IsChecked="{Binding Item.fairtrade}" Grid.Column="3" Grid.Row="12" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+                        <Label Grid.Column="2" Grid.Row="13" Text="Eco"  VerticalOptions="Center"/>
+                    <CheckBox IsChecked="{Binding Item.eco}" Grid.Column="3" Grid.Row="13" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+                        <Label Grid.Column="2" Grid.Row="14" Text="Vegetarian"  VerticalOptions="Center"/>
+                    <CheckBox IsChecked="{Binding Item.vegetarian}" Grid.Column="3" Grid.Row="14" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+                        <Label Grid.Column="2" Grid.Row="15" Text="Vegan"  VerticalOptions="Center"/>
+                    <CheckBox IsChecked="{Binding Item.vegan}" Grid.Column="3" Grid.Row="15" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+                        <Entry Placeholder="healthnotes" Text="{Binding Item.healthnotes}" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="5"/>
+                    <Button Text="Add" Command="{Binding AddItemCommand}" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="17"/>
+
+                </Grid>
                 
+                </ScrollView>
 
-            </Grid>
+
+        </Grid>
 
 
 

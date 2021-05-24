@@ -11,9 +11,9 @@ namespace FoodTracker
         public App()
         {
             InitializeComponent();
-            DependencyService.Register<IFtTrack, FtTrack>();
-            //  MainPage = new NavigationPage(new MainPage()) ;
-            MainPage = new MainPage();
+            DependencyService.Register<IFtTrackService, FtTrackService>();
+          
+             MainPage = new NavigationPage(new MainPage()) ;
         }
 
         protected override void OnStart()
