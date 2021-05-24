@@ -1,4 +1,5 @@
-﻿using FoodTracker.Views;
+﻿using FoodTracker.ftTrackService;
+using FoodTracker.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,8 +11,9 @@ namespace FoodTracker
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new MainPage()) ;
+            DependencyService.Register<IFtTrack, FtTrack>();
+            //  MainPage = new NavigationPage(new MainPage()) ;
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

@@ -3,19 +3,26 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using FoodTracker.ftTrackService;
+using FoodTracker.Models;
 
 namespace FoodTracker.ViewModels
 {
    public class MainPageViewModel
     {
+        IFtTrack _rest = DependencyService.Get<IFtTrack>();
         public MainPageViewModel()
         {
-            OpenAddViewCommand = new Command(OnOpenAddView);
+            OnOpenAddView();
+            // OpenAddViewCommand = new Command(OnOpenAddView);
         }
+        
 
-        private void OnOpenAddView()
+        private async void OnOpenAddView()
         {
-            App.Current.MainPage.Navigation.PushAsync(new AddView());
+            
+           var gg = await  _rest.GetItems();
+         //   await  App.Current.MainPage.Navigation.PushAsync(new AddView());
         }
 
         public Command OpenAddViewCommand { get; set; }
