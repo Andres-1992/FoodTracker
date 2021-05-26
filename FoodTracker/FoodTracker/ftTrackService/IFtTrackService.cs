@@ -10,6 +10,7 @@ namespace FoodTracker.ftTrackService
    public interface IFtTrackService
     {
         Task<ObservableCollection<Item>> GetItems();
+        Task<ObservableCollection<Item>> GetItemById(string ean);
         Task<bool> AddItem(Item item);
     }
 }

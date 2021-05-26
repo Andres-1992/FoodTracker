@@ -8,9 +8,9 @@ namespace FoodTracker.Models
 
     public class Item
     {
-        public ObservableCollection<string> weight { get; set; }
-        public ObservableCollection<string> contains { get; set; }
-        public string _id { get; set; }
+       // public ObservableCollection<string> weight { get; set; }
+       // public ObservableCollection<string> contains { get; set; }
+       // public string _id { get; set; }
         public string name { get; set; }
         public string brand { get; set; }
         public object ean { get; set; }
@@ -27,7 +27,7 @@ namespace FoodTracker.Models
         public bool vegetarian { get; set; }
         public bool vegan { get; set; }
         public string healthnotes { get; set; }
-        public int __v { get; set; }
+        //public int __v { get; set; }
         public int sugar { get; set; }
     }
 }

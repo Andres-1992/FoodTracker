@@ -28,7 +28,7 @@
             </Grid.RowDefinitions>
         
         <Button Text="Add item" Command="{Binding OpenAddViewCommand}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button Text="View all items" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Button Text="View all items" Command="{Binding OpenAllCommand}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
         <Button Text="Scan to find item" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>            
         </Grid>
     </StackLayout>

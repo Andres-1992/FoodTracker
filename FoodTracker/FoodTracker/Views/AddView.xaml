@@ -2,14 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FoodTracker.Views.AddView"
-             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" xmlns:viewmodels="clr-namespace:FoodTracker.ViewModels"
-             x:DataType="viewmodels:AddViewModel">
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" xmlns:viewmodels="clr-namespace:FoodTracker.ViewModels">
     <ContentPage.BindingContext>
         <viewmodels:AddViewModel>
             
         </viewmodels:AddViewModel>
     </ContentPage.BindingContext>
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}"/>
+    </ContentPage.ToolbarItems>
     <StackLayout>
 
             <Grid >
@@ -29,10 +30,16 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>                   
                 </Grid.RowDefinitions >
+            <!--<Label Text="EAN" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" Grid.Row="1" Grid.Column="3"/>-->
 
-            <Entry Placeholder="EAN" Text="{Binding Item.ean,Mode=OneWayToSource}" Grid.Column="5" Grid.Row="1" ClearButtonVisibility="WhileEditing"/>
+            <Entry Placeholder="EAN" Text="{Binding ScanResult}" Grid.Column="5" Grid.Row="1" ClearButtonVisibility="WhileEditing"/>
             <ImageButton  Source="@android:drawable/camera2" Command="{Binding ToggleScannerCommand}"  Grid.Column="2" HeightRequest="40" WidthRequest="40"   Grid.Row="1"/>
-            <zxing:ZXingScannerView x:Name="Scanner" IsVisible="{Binding ScannerToggled,Mode=TwoWay}"  IsScanning="True" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5" />
+            <zxing:ZXingScannerView x:Name="Scanner"
+                                    IsVisible="{Binding ScannerToggled,Mode=TwoWay}" 
+                                    IsScanning="{Binding ScannerToggled}" 
+                                    Result="{Binding Result,Mode=TwoWay}"
+                                    ScanResultCommand="{Binding ScanCommand}"
+                                    Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5" />
 
             <ScrollView Grid.Row="4"  Grid.Column="1" Grid.ColumnSpan="5">
                     <Grid>
@@ -69,14 +76,22 @@
                         
                         <Entry Placeholder="Name" Text="{Binding Item.name}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
                     <Entry Placeholder="Brand" Text="{Binding Item.brand}" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Energy" Text="{Binding Item.energy,Mode=OneWayToSource}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Carbs" Text="{Binding Item.carbs,Mode=OneWayToSource}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Protein" Text="{Binding Item.protein,Mode=OneWayToSource}" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Sodium" Text="{Binding Item.sodium,Mode=OneWayToSource}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Fat" Text="{Binding Item.fat,Mode=OneWayToSource}" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Saturated fat" Text="{Binding Item.satfat,Mode=OneWayToSource}" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Salt" Text="{Binding Item.salt,Mode=OneWayToSource}" Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Sugar" Text="{Binding Item.sugar,Mode=OneWayToSource}" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Energy" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry Placeholder="Energy"  Text="{Binding Item.energy}" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Carbs" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry Placeholder="Carbs" Text="{Binding Item.carbs}" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Protein" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="5" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry Placeholder="Protein" Text="{Binding Item.protein}" Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Sodium" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="6" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry Placeholder="Sodium" Text="{Binding Item.sodium}" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Fat" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="7" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry Placeholder="Fat" Text="{Binding Item.fat}" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Satfat" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="8" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry Placeholder="Satfat" Text="{Binding Item.satfat}" Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Salt" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="9" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry Placeholder="Salt" Text="{Binding Item.salt}" Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Sugar" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry Placeholder="Sugar" Text="{Binding Item.sugar}" Grid.Row="10" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
 
                         <Label  Grid.Column="2" Grid.Row="11" Text="Organic"  VerticalOptions="Center" />
                     <CheckBox  IsChecked="{Binding Item.organic}" Grid.Column="3" Grid.Row="11" Grid.ColumnSpan="5" VerticalOptions="Center"/>
@@ -88,9 +103,7 @@
                     <CheckBox IsChecked="{Binding Item.vegetarian}" Grid.Column="3" Grid.Row="14" Grid.ColumnSpan="5" VerticalOptions="Center"/>
                         <Label Grid.Column="2" Grid.Row="15" Text="Vegan"  VerticalOptions="Center"/>
                     <CheckBox IsChecked="{Binding Item.vegan}" Grid.Column="3" Grid.Row="15" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Entry Placeholder="healthnotes" Text="{Binding Item.healthnotes}" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="5"/>
-                    <Button Text="Add" Command="{Binding AddItemCommand}" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="17"/>
-
+                    <Entry Placeholder="healthnotes" Text="{Binding Item.healthnotes}" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="5"/>
                 </Grid>
                 
                 </ScrollView>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:FoodTracker.ViewModels" xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             x:Class="FoodTracker.Views.AllItemsView">
+    <ContentPage.BindingContext>
+        <viewmodels:AllItemsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="@android:drawable/camera2" Command="{Binding ToggleScanner}"/>
+    </ContentPage.ToolbarItems>
+
+
+
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <zxing:ZXingScannerView   Grid.Row="1"                 
+            IsVisible="{Binding IsVisible, Mode=TwoWay}"            
+                    IsScanning="{Binding IsVisible, Mode=TwoWay}" 
+                    IsAnalyzing="{Binding IsVisible, Mode=TwoWay}"
+                    Result="{Binding Result, Mode=TwoWay}" 
+                    ScanResultCommand="{Binding ScanCommand}" />
+            <ScrollView Grid.Row="3">
+
+            <Grid>
+               
+                <CollectionView ItemsSource="{Binding Items}"
+                                BackgroundColor="Black"
+                                SelectedItem=""
+                                SelectionMode="Single"
+                                ItemsLayout="VerticalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10">
+                                <Frame CornerRadius="20" HasShadow="True" BackgroundColor="Black">
+                                    <StackLayout HorizontalOptions="FillAndExpand" Margin="0" Padding="0">
+                                        <Label Text="{Binding name}" FontSize="Large" TextColor="White"/>
+                                        <Label Text="{Binding brand}" FontSize="Large" TextColor="White"/>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </Grid>
+        </ScrollView>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

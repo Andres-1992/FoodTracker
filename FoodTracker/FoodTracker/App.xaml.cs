@@ -11,7 +11,7 @@ namespace FoodTracker
         public App()
         {
             InitializeComponent();
-            DependencyService.Register<IFtTrackService, FtTrackService>();
+          //  DependencyService.Register<IFtTrackService, FtTrackService>();
           
              MainPage = new NavigationPage(new MainPage()) ;
         }
