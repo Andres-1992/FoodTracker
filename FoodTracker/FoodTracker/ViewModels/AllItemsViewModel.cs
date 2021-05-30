@@ -14,36 +14,59 @@ namespace FoodTracker.ViewModels
 {
     public class AllItemsViewModel : BindableObject
     {
-        IFtTrackService _rest = new FtTrackService();
+        private readonly IFtTrackService _rest = new FtTrackService();
+        public AllItemsViewModel()
+        {
+            GetItems(); // Get all items when page is loading
+            ToggleScanner = new Command(OnToggleScanner);
+            ScanCommand = new Command(OnScanCommand);
+            RefreshCommand = new Command(OnRefreshCommand);
+        }
 
         private ObservableCollection<Item> items;
         private bool isVisible = false;
         public Command ToggleScanner { get; }
         public Command ScanCommand { get; }
+        public Command RefreshCommand { get;  }
         public Result Result { get; set; }
-        private string scannedCode;
-        private bool isScanning = false;
+        private bool isBusy;
 
-        public bool IsScanning
+        public bool IsBusy
         {
-            get { return isScanning; }
+            get { return isBusy; }
+            set { isBusy = value; OnPropertyChanged(); }
+        }
+
+
+
+        public Item SelectedItem
+
+        {
             set {
-                isScanning = value;
+                if (value != null) //when Item is selected: show nutrition facts, then clear the Item.
+                    Application.Current.MainPage.DisplayAlert(value.name+" Nutrituion facts",
+                        $"Energy \t\t{value.energy}kcal"+"\n"+
+                        $"Fat       \t\t{value.fat}g"+"\n"+
+                        $"Satfat \t\t{value.satfat}g" + "\n" +
+                        $"Protein\t\t{value.protein}g" + "\n" +
+                        $"Carbs  \t\t{value.carbs}g" + "\n"+
+                        $"Sugar  \t\t{value.sugar}g" + "\n"+
+                        $"Notes  \t\t{value.healthnotes}" + "\n",
+                        "OK");
                 OnPropertyChanged();
             }
         }
 
 
 
-        public string ScannedCode
+
+        public ObservableCollection<Item> Items
         {
-            get { return scannedCode; }
+            get { return items; }
             set {
-                scannedCode = value;
-                OnPropertyChanged();
+                items = value; OnPropertyChanged();
             }
         }
-
 
         public bool IsVisible
         {
@@ -53,57 +76,64 @@ namespace FoodTracker.ViewModels
                 OnPropertyChanged();
             }
         }
-
-
-        public AllItemsViewModel()
-        {
-            GetItems();
-            ToggleScanner = new Command(OnToggleScanner);
-            ScanCommand = new Command(OnScanCommand);
-        }
-
+        /// <summary>
+        /// When barcode is detected begin invoke on main thread and add send result to SearchInList method
+        /// turn off the scanner camera
+        /// search
+        /// </summary>
         private void OnScanCommand()
         {
             OnToggleScanner();
             Device.BeginInvokeOnMainThread(() => {
-                scannedCode = Result.Text;
                 SearchInlist(Result.Text);
             });
         }
-
+        /// <summary>
+        /// Search for specific Item with EAN code in RESt API
+        /// Add result to Public SelectedItem
+        /// </summary>
+        /// <param name="ean"></param>
         private async void SearchInlist(string ean)
         {
-            var result = await _rest.GetItemById(ean);
-            if (result != null) Items = result;
+            ObservableCollection<Item> result = await _rest.GetItemById(ean);
+            if (result != null)
+            {
+                Items.Clear();
+                Items = result;
+            }
         }
+        /// <summary>
+        /// turn the barcodescanner camera on/off
+        /// </summary>
+        private void OnToggleScanner() => IsVisible = !IsVisible;
 
-        private void OnToggleScanner()
-        {
-            IsVisible = !IsVisible;
-            IsScanning = !IsScanning;
-        }
-
+        /// <summary>
+        /// Get List of Items from REST API, add to Public ObservableCollection
+        /// </summary>
         private async void GetItems()
         {
             try
             {
-                var result = await _rest.GetItems();
+                ObservableCollection<Item> result = await _rest.GetItems();
                 if (result != null) Items = result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
             }
         }
-
-        public ObservableCollection<Item> Items
+        /// <summary>
+        /// Pull to refresh command, realoads all the items from REST API
+        /// </summary>
+        private  void OnRefreshCommand()
         {
-            get { return items; }
-            set {
-                items = value; OnPropertyChanged();
-            }
+            IsBusy = true;
+            Items.Clear();
+            GetItems();
+            IsBusy = false;
         }
+
 
 
     }

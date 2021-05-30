@@ -6,11 +6,11 @@
     <ContentPage.BindingContext>
         <viewmodels:MainPageViewModel/>
     </ContentPage.BindingContext>
-    <StackLayout>
+    <StackLayout BackgroundColor="White">
         <Frame BackgroundColor="Black" Padding="24" CornerRadius="10">
             <Label Text="Food tracker app" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+        <Grid BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="auto"/>
@@ -18,18 +18,15 @@
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
         
-        <Button Text="Add item" Command="{Binding OpenAddViewCommand}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button Text="View all items" Command="{Binding OpenAllCommand}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button Text="Scan to find item" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"/>            
+        <Button Text="Add item" Command="{Binding OpenAddViewCommand}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Button Text="View all items" Command="{Binding OpenAllCommand}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         </Grid>
     </StackLayout>
 

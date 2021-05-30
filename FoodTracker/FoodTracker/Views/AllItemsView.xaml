@@ -21,29 +21,72 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
-            <zxing:ZXingScannerView   Grid.Row="1"                 
+            <zxing:ZXingScannerView  Grid.Row="1"                 
             IsVisible="{Binding IsVisible, Mode=TwoWay}"            
                     IsScanning="{Binding IsVisible, Mode=TwoWay}" 
                     IsAnalyzing="{Binding IsVisible, Mode=TwoWay}"
                     Result="{Binding Result, Mode=TwoWay}" 
                     ScanResultCommand="{Binding ScanCommand}" />
+            
             <ScrollView Grid.Row="3">
-
-            <Grid>
+                <RefreshView IsRefreshing="{Binding IsBusy}"
+                             Command="{Binding RefreshCommand}"
+                         RefreshColor="Blue">
+                    <Grid>
                
                 <CollectionView ItemsSource="{Binding Items}"
-                                BackgroundColor="Black"
-                                SelectedItem=""
+                                BackgroundColor="White"
+                                SelectedItem="{Binding SelectedItem}"
                                 SelectionMode="Single"
-                                ItemsLayout="VerticalList">
-                    <CollectionView.ItemTemplate>
+                                ItemsLayout="VerticalList"
+                                
+                                >
+                            <CollectionView.EmptyView>
+                                <StackLayout Padding="12">
+                                    <Label Text="No Items" HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="Black"/>
+                                </StackLayout>
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate >
+                        
                         <DataTemplate>
-                            <Grid Padding="10">
-                                <Frame CornerRadius="20" HasShadow="True" BackgroundColor="Black">
-                                    <StackLayout HorizontalOptions="FillAndExpand" Margin="0" Padding="0">
-                                        <Label Text="{Binding name}" FontSize="Large" TextColor="White"/>
-                                        <Label Text="{Binding brand}" FontSize="Large" TextColor="White"/>
-                                    </StackLayout>
+                            <Grid Padding="5">
+                                <Frame CornerRadius="10" HasShadow="True" BackgroundColor="Black" >
+                                    <StackLayout HorizontalOptions="FillAndExpand" >
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+
+                                                </Grid.ColumnDefinitions >
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="*"/>
+
+                                                </Grid.RowDefinitions>
+
+                                                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Text="{Binding name}" FontSize="Large" FontAttributes="Bold" TextColor="White" />
+                                                <Label Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="2" Text="{Binding brand}" FontSize="Small" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="End"/>
+
+                                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                                                        <Label Text="{Binding energy}" FontSize="Medium" TextColor="White"   />
+                                                <Label Text="kcal" FontSize="Medium" TextColor="White"  />
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                                                        <Label Text="{Binding protein}" FontSize="Medium" TextColor="White"  />
+                                                        <Label Text="Protein" FontSize="Medium" TextColor="White"  />
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="2" HorizontalOptions="End" >
+                                                        <Label Text="{Binding weight[0],Mode=TwoWay}" FontSize="Medium" TextColor="White"/>
+                                                <Label Text="{Binding weight[1],Mode=TwoWay}" FontSize="Medium" TextColor="White" />
+                                                        
+                                                    </StackLayout>
+
+                                    </Grid>
+                                        </StackLayout>
                                 </Frame>
                             </Grid>
                         </DataTemplate>
@@ -51,7 +94,9 @@
 
                 </CollectionView>
             </Grid>
-        </ScrollView>
+                </RefreshView>
+            </ScrollView>
+            
         </Grid>
 
     </ContentPage.Content>

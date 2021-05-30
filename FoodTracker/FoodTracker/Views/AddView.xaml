@@ -8,7 +8,7 @@
             
         </viewmodels:AddViewModel>
     </ContentPage.BindingContext>
-    <ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems >
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}"/>
     </ContentPage.ToolbarItems>
     <StackLayout>
@@ -41,7 +41,7 @@
                                     ScanResultCommand="{Binding ScanCommand}"
                                     Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5" />
 
-            <ScrollView Grid.Row="4"  Grid.Column="1" Grid.ColumnSpan="5">
+            <ScrollView Grid.Row="4" BackgroundColor="Black"  Grid.Column="1" Grid.ColumnSpan="5" >
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="15"/>
@@ -70,40 +70,47 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="15"/>
                         </Grid.RowDefinitions>
-                        
-                        <Entry Placeholder="Name" Text="{Binding Item.name}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry Placeholder="Brand" Text="{Binding Item.brand}" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Energy" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Placeholder="Energy"  Text="{Binding Item.energy}" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Carbs" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Placeholder="Carbs" Text="{Binding Item.carbs}" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Protein" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="5" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Placeholder="Protein" Text="{Binding Item.protein}" Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Sodium" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="6" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Placeholder="Sodium" Text="{Binding Item.sodium}" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Fat" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="7" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Placeholder="Fat" Text="{Binding Item.fat}" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Satfat" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="8" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Placeholder="Satfat" Text="{Binding Item.satfat}" Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Salt" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="9" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Placeholder="Salt" Text="{Binding Item.salt}" Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Sugar" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Placeholder="Sugar" Text="{Binding Item.sugar}" Grid.Row="10" Grid.Column="4" Grid.ColumnSpan="3" ClearButtonVisibility="WhileEditing"/>
 
-                        <Label  Grid.Column="2" Grid.Row="11" Text="Organic"  VerticalOptions="Center" />
-                    <CheckBox  IsChecked="{Binding Item.organic}" Grid.Column="3" Grid.Row="11" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Grid.Row="12" Text="Fairtrade" VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.fairtrade}" Grid.Column="3" Grid.Row="12" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Grid.Row="13" Text="Eco"  VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.eco}" Grid.Column="3" Grid.Row="13" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Grid.Row="14" Text="Vegetarian"  VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.vegetarian}" Grid.Column="3" Grid.Row="14" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="2" Grid.Row="15" Text="Vegan"  VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.vegan}" Grid.Column="3" Grid.Row="15" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                    <Entry Placeholder="healthnotes" Text="{Binding Item.healthnotes}" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="5"/>
+                    <Entry ReturnType="Next" Placeholder="Name" Text="{Binding Item.name}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
+                    <Entry ReturnType="Next" Placeholder="Brand" Text="{Binding Item.brand}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Energy" Grid.Column="1"  Grid.Row="3" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry ReturnType="Next" Placeholder="Energy" Text="{Binding Item.energy}" Grid.Row="3" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Carbs" Grid.Column="1"  Grid.Row="4" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry ReturnType="Next" Placeholder="Carbs" Text="{Binding Item.carbs}" Grid.Row="4" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Protein" Grid.Column="1"  Grid.Row="5" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry ReturnType="Next" Placeholder="Protein" Text="{Binding Item.protein}" Grid.Row="5" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Sodium" Grid.Column="1"  Grid.Row="6" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry ReturnType="Next" Placeholder="Sodium" Text="{Binding Item.sodium}" Grid.Row="6" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Fat" Grid.Column="1"  Grid.Row="7" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry ReturnType="Next" Placeholder="Fat" Text="{Binding Item.fat}" Grid.Row="7" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Satfat" Grid.Column="1"  Grid.Row="8" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry ReturnType="Next" Placeholder="Satfat" Text="{Binding Item.satfat}" Grid.Row="8" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Label Text="Weight" Grid.Column="1"  Grid.Row="9" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry ReturnType="Next" Placeholder="Weight" Text="{Binding Weight}" Grid.Row="9" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Picker ItemsSource="{Binding Measures}" SelectedItem="{Binding SelectedMeasure}"  Grid.Row="9" Grid.Column="3" WidthRequest="60" />
+                    <Label  Text="Sugar" Grid.Column="1"  Grid.Row="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
+                    <Entry ReturnType="Next" Placeholder="Sugar" Text="{Binding Item.sugar}" Grid.Row="10" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+
+                        <Label  Grid.Column="1" Grid.Row="11" Text="Organic"  VerticalOptions="Center" />
+                    <CheckBox  IsChecked="{Binding Item.organic}" Grid.Column="2" Grid.Row="11" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Grid.Row="12" Text="Fairtrade" VerticalOptions="Center"/>
+                    <CheckBox IsChecked="{Binding Item.fairtrade}" Grid.Column="2" Grid.Row="12" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Grid.Row="13" Text="Eco"  VerticalOptions="Center"/>
+                    <CheckBox IsChecked="{Binding Item.eco}" Grid.Column="2" Grid.Row="13" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Grid.Row="14" Text="Vegetarian"  VerticalOptions="Center"/>
+                    <CheckBox IsChecked="{Binding Item.vegetarian}" Grid.Column="2" Grid.Row="14" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Grid.Row="15" Text="Vegan"  VerticalOptions="Center"/>
+                    <CheckBox IsChecked="{Binding Item.vegan}" Grid.Column="2" Grid.Row="15" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+
+                    <Entry ReturnCommand="{Binding AddContainsCommand}" ClearButtonVisibility="WhileEditing" ReturnType="Next" Placeholder="Contains" Text="{Binding Content}" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2"/>
+                    <!--<Button Command="{Binding AddContainsCommand}" Text="Add" Grid.Column="5"  Grid.Row="16"/>-->
+                    <ImageButton Source="@android:drawable/Delete" Command="{Binding DeleteContainsCommand}" BackgroundColor="Black" Grid.Column="3" WidthRequest="1"  Grid.Row="17"/>
+                    <Picker  ItemsSource="{Binding Item.contains}" SelectedItem="{Binding SelectedContent}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="17"/>
+                    <Entry ReturnCommand="{Binding AddItemCommand}" Placeholder="healthnotes" Text="{Binding Item.healthnotes}" Grid.Column="1" Grid.Row="18" Grid.ColumnSpan="5"/>
                 </Grid>
                 
                 </ScrollView>
