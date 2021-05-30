@@ -17,7 +17,7 @@ namespace FoodTracker.ftTrackService
     public class FtTrackService : IFtTrackService
     {
         // static string BaseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000";
-        string baseUrl = "https://lobonode.ddns.net";
+       private readonly string baseUrl = "https://lobonode.ddns.net";
 
         public async Task<bool> AddItem(Item item)
         {
@@ -26,7 +26,6 @@ namespace FoodTracker.ftTrackService
             var json = JsonConvert.SerializeObject(item);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage respons = await client.PostAsync(url,content);
-            var result = respons.Content;
             return respons.IsSuccessStatusCode;
         }
 

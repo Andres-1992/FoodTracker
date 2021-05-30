@@ -22,16 +22,21 @@ namespace FoodTracker.ViewModels
             ScanCommand = new Command(OnScanCommand);
             AddContainsCommand = new Command(OnAddContainsCommand);
             DeleteContainsCommand = new Command(OnDeleteContainsCommand);
-        }  
-        public Command AddItemCommand { get; }
-        public Result Result { get; set; }
+        }
+        public Command ToggleScannerCommand { get; }
+        public Command AddItemCommand { get; }   
         public Command ScanCommand { get; }
         public Command AddContainsCommand { get; }
         public Command DeleteContainsCommand { get; }
+        public Result Result { get; set; }
         private Item item = new Item();
         private bool scannerToggled;
         public bool isSuccessfull;
         private string scanResult;
+        private Enum selectedMeasure;
+        private string weight;
+        private string selectedContent;
+        private string content = "";
         private ObservableCollection<Measure> measures = //Use enums to fill the picker alternatives.
             new ObservableCollection<Measure>() { 
             Measure.kilogram,
@@ -42,10 +47,7 @@ namespace FoodTracker.ViewModels
             Measure.deciliter,
             Measure.centiliter,
             Measure.milliliter };
-        private Enum selectedMeasure;
-        private string weight;
-        private string selectedContent;
-        private string content;
+        #region Private properties
         public string Content
         {
             get { return content; }
@@ -112,7 +114,8 @@ namespace FoodTracker.ViewModels
                 OnPropertyChanged();
             }
         }
-        public Command ToggleScannerCommand { get; }
+        #endregion
+        #region Commands
         /// <summary>
         /// Turn the scanner on/off
         /// </summary>
@@ -169,5 +172,6 @@ namespace FoodTracker.ViewModels
                 throw;
             }
         }
+        #endregion
     }
 }

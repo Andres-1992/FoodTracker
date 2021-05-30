@@ -29,18 +29,13 @@ namespace FoodTracker.ViewModels
         public Command ScanCommand { get; }
         public Command RefreshCommand { get;  }
         public Result Result { get; set; }
-        private bool isBusy;
-
+        private bool isBusy=false;
         public bool IsBusy
         {
             get { return isBusy; }
             set { isBusy = value; OnPropertyChanged(); }
         }
-
-
-
         public Item SelectedItem
-
         {
             set {
                 if (value != null) //when Item is selected: show nutrition facts, then clear the Item.
@@ -56,10 +51,6 @@ namespace FoodTracker.ViewModels
                 OnPropertyChanged();
             }
         }
-
-
-
-
         public ObservableCollection<Item> Items
         {
             get { return items; }
@@ -67,7 +58,6 @@ namespace FoodTracker.ViewModels
                 items = value; OnPropertyChanged();
             }
         }
-
         public bool IsVisible
         {
             get { return isVisible; }
@@ -76,18 +66,20 @@ namespace FoodTracker.ViewModels
                 OnPropertyChanged();
             }
         }
+
         /// <summary>
         /// When barcode is detected begin invoke on main thread and add send result to SearchInList method
         /// turn off the scanner camera
         /// search
         /// </summary>
-        private void OnScanCommand()
+         private void OnScanCommand()
         {
             OnToggleScanner();
             Device.BeginInvokeOnMainThread(() => {
                 SearchInlist(Result.Text);
             });
         }
+
         /// <summary>
         /// Search for specific Item with EAN code in RESt API
         /// Add result to Public SelectedItem
@@ -102,6 +94,7 @@ namespace FoodTracker.ViewModels
                 Items = result;
             }
         }
+
         /// <summary>
         /// turn the barcodescanner camera on/off
         /// </summary>
@@ -123,8 +116,9 @@ namespace FoodTracker.ViewModels
                 throw;
             }
         }
+
         /// <summary>
-        /// Pull to refresh command, realoads all the items from REST API
+        /// Pull to refresh command, realoads all items from REST API
         /// </summary>
         private  void OnRefreshCommand()
         {
@@ -133,8 +127,5 @@ namespace FoodTracker.ViewModels
             GetItems();
             IsBusy = false;
         }
-
-
-
     }
 }

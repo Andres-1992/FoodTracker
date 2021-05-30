@@ -41,7 +41,7 @@
                                     ScanResultCommand="{Binding ScanCommand}"
                                     Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5" />
 
-            <ScrollView Grid.Row="4" BackgroundColor="Black"  Grid.Column="1" Grid.ColumnSpan="5" >
+            <ScrollView Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5" >
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="15"/>
@@ -78,22 +78,22 @@
                     <Entry ReturnType="Next" Placeholder="Name" Text="{Binding Item.name}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
                     <Entry ReturnType="Next" Placeholder="Brand" Text="{Binding Item.brand}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
                     <Label Text="Energy" Grid.Column="1"  Grid.Row="3" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry ReturnType="Next" Placeholder="Energy" Text="{Binding Item.energy}" Grid.Row="3" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Energy" Text="{Binding Item.energy}" Grid.Row="3" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
                     <Label Text="Carbs" Grid.Column="1"  Grid.Row="4" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry ReturnType="Next" Placeholder="Carbs" Text="{Binding Item.carbs}" Grid.Row="4" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Carbs" Text="{Binding Item.carbs}" Grid.Row="4" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
                     <Label Text="Protein" Grid.Column="1"  Grid.Row="5" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry ReturnType="Next" Placeholder="Protein" Text="{Binding Item.protein}" Grid.Row="5" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Protein" Text="{Binding Item.protein}" Grid.Row="5" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
                     <Label Text="Sodium" Grid.Column="1"  Grid.Row="6" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry ReturnType="Next" Placeholder="Sodium" Text="{Binding Item.sodium}" Grid.Row="6" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Sodium" Text="{Binding Item.sodium}" Grid.Row="6" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
                     <Label Text="Fat" Grid.Column="1"  Grid.Row="7" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry ReturnType="Next" Placeholder="Fat" Text="{Binding Item.fat}" Grid.Row="7" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Fat" Text="{Binding Item.fat}" Grid.Row="7" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
                     <Label Text="Satfat" Grid.Column="1"  Grid.Row="8" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry ReturnType="Next" Placeholder="Satfat" Text="{Binding Item.satfat}" Grid.Row="8" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Satfat" Text="{Binding Item.satfat}" Grid.Row="8" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
                     <Label Text="Weight" Grid.Column="1"  Grid.Row="9" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry ReturnType="Next" Placeholder="Weight" Text="{Binding Weight}" Grid.Row="9" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Weight" Text="{Binding Weight}" Grid.Row="9" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
                     <Picker ItemsSource="{Binding Measures}" SelectedItem="{Binding SelectedMeasure}"  Grid.Row="9" Grid.Column="3" WidthRequest="60" />
                     <Label  Text="Sugar" Grid.Column="1"  Grid.Row="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry ReturnType="Next" Placeholder="Sugar" Text="{Binding Item.sugar}" Grid.Row="10" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Sugar" Text="{Binding Item.sugar}" Grid.Row="10" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
 
                         <Label  Grid.Column="1" Grid.Row="11" Text="Organic"  VerticalOptions="Center" />
                     <CheckBox  IsChecked="{Binding Item.organic}" Grid.Column="2" Grid.Row="11" Grid.ColumnSpan="5" VerticalOptions="Center"/>
