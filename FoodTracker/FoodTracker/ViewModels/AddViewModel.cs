@@ -12,7 +12,9 @@ namespace FoodTracker.ViewModels
 {
     public class AddViewModel : BindableObject
     {
-        private readonly IFtTrackService _rest = new FtTrackService();
+        private readonly IFtTrackService _rest = DependencyService.Get<IFtTrackService>();
+
+        //private readonly IFtTrackService _rest = new FtTrackService();
         public AddViewModel()
         {
             Item.weight = new string[2];
@@ -136,7 +138,7 @@ namespace FoodTracker.ViewModels
         {
             if (!item.contains.Contains(content.ToLower()))
             {
-               item.contains.Add(content.ToLower());
+               item.contains.Add(content.ToLower().Trim());
                 Content = "";
             }
             else Application.Current.MainPage.DisplayAlert("Something went wrong", content + " was already added", "OK");

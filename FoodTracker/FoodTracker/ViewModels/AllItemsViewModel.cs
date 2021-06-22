@@ -14,43 +14,65 @@ namespace FoodTracker.ViewModels
 {
     public class AllItemsViewModel : BindableObject
     {
-        private readonly IFtTrackService _rest = new FtTrackService();
+        private readonly IFtTrackService _rest = DependencyService.Get<IFtTrackService>();
         public AllItemsViewModel()
         {
-            GetItems(); // Get all items when page is loading
+            
+          GetItems(); // Get all items when page is loading
             ToggleScanner = new Command(OnToggleScanner);
             ScanCommand = new Command(OnScanCommand);
             RefreshCommand = new Command(OnRefreshCommand);
+            SelectCommand = new Command(OnSelectCommand);
         }
 
+        //when Item is selected: show nutrition facts, then clear the Item.
+        private async void OnSelectCommand()
+        {
+            if (selectedItem != null)
+            {
+                selectedItem = null;
+                string contains="";
+                foreach (string item in previouslySelected.contains)
+                {
+                    contains +=$"{item}\n";
+                }
+                await Application.Current.MainPage.DisplayAlert(previouslySelected.name + " Nutrituion facts",
+                            $"Energy \t\t{previouslySelected.energy}kcal" + "\n" +
+                            $"Fat       \t\t{previouslySelected.fat}g" + "\n" +
+                            $"Satfat \t\t{previouslySelected.satfat}g" + "\n" +
+                            $"Protein\t\t{previouslySelected.protein}g" + "\n" +
+                            $"Carbs  \t\t{previouslySelected.carbs}g" + "\n" +
+                            $"Sugar  \t\t{previouslySelected.sugar}g" + "\n" +
+                            $"Notes  \t\t{previouslySelected.healthnotes}" + "\n"+
+                            $"Contains:\n{contains}" ,
+                            "OK");
+        }
+    }
         private ObservableCollection<Item> items;
         private bool isVisible = false;
         public Command ToggleScanner { get; }
         public Command ScanCommand { get; }
         public Command RefreshCommand { get;  }
+        public Command SelectCommand { get;  }
         public Result Result { get; set; }
         private bool isBusy=false;
+        private Item selectedItem;
+        private Item previouslySelected;
         public bool IsBusy
         {
             get { return isBusy; }
-            set { isBusy = value; OnPropertyChanged(); }
+            set { isBusy = value;
+                OnPropertyChanged(); }
         }
         public Item SelectedItem
         {
             set {
-                if (value != null) //when Item is selected: show nutrition facts, then clear the Item.
-                    Application.Current.MainPage.DisplayAlert(value.name+" Nutrituion facts",
-                        $"Energy \t\t{value.energy}kcal"+"\n"+
-                        $"Fat       \t\t{value.fat}g"+"\n"+
-                        $"Satfat \t\t{value.satfat}g" + "\n" +
-                        $"Protein\t\t{value.protein}g" + "\n" +
-                        $"Carbs  \t\t{value.carbs}g" + "\n"+
-                        $"Sugar  \t\t{value.sugar}g" + "\n"+
-                        $"Notes  \t\t{value.healthnotes}" + "\n",
-                        "OK");
+                selectedItem = value;
+                previouslySelected = selectedItem;
                 OnPropertyChanged();
             }
         }
+
         public ObservableCollection<Item> Items
         {
             get { return items; }
@@ -98,7 +120,7 @@ namespace FoodTracker.ViewModels
         /// <summary>
         /// turn the barcodescanner camera on/off
         /// </summary>
-        private void OnToggleScanner() => IsVisible = !IsVisible;
+        private void OnToggleScanner() =>IsVisible = !IsVisible;
 
         /// <summary>
         /// Get List of Items from REST API, add to Public ObservableCollection

@@ -17,43 +17,47 @@ namespace FoodTracker.ftTrackService
     public class FtTrackService : IFtTrackService
     {
         // static string BaseUrl = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5000" : "http://localhost:5000";
-       private readonly string baseUrl = "https://lobonode.ddns.net";
+        //  string baseUrl = "https://lobonode.ddns.net";
+        private static HttpClient client = new HttpClient() {
+            BaseAddress = new Uri("https://lobonode.ddns.net")
+        };
 
         public async Task<bool> AddItem(Item item)
         {
-            string url = baseUrl + "/ft/addItem";
-            HttpClient client = new HttpClient();
-            var json = JsonConvert.SerializeObject(item);
+            string url = "/ft/addItem";
+            //  HttpClient client = new HttpClient();
+            string json = JsonConvert.SerializeObject(item);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage respons = await client.PostAsync(url,content);
+            HttpResponseMessage respons = await client.PostAsync(url, content);
+           // var result = respons.Content;
             return respons.IsSuccessStatusCode;
         }
 
         public async Task<ObservableCollection<Item>> GetItemById(string ean)
         {
-            string url = baseUrl + $"/ft/getItem/{ean}";
-            HttpClient client = new HttpClient();
-        
+            string url = $"/ft/getItem/{ean}";
+            // HttpClient client = new HttpClient();
+
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                var result = await response.Content.ReadAsStringAsync();
-        
-                var fountItem = JsonConvert.DeserializeObject<Item>(result);
-                return new ObservableCollection<Item>() {fountItem}; 
+                string result = await response.Content.ReadAsStringAsync();
+
+                Item fountItem = JsonConvert.DeserializeObject<Item>(result);
+                return new ObservableCollection<Item>() { fountItem };
             }
             return null;
         }
 
         public async Task<ObservableCollection<Item>> GetItems()
         {
-            string url = baseUrl + "/ft/getItems/";
-            HttpClient client = new HttpClient();
+            string url = "/ft/getItems/";
+            // HttpClient client = new HttpClient();
 
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                var result = await response.Content.ReadAsStringAsync();
+                string result = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<ObservableCollection<Item>>(result);
             }
             return null;

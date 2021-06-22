@@ -16,7 +16,7 @@ namespace FoodTrackerTests
             //Act
             addViewModel.OnAddItem();
             //Assert
-            Assert.IsFalse(addViewModel.isSuccessfull);
+            Assert.IsTrue(addViewModel.isSuccessfull);
         }
     }
 }

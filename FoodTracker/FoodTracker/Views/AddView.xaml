@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
              x:Class="FoodTracker.Views.AddView"
-             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" xmlns:viewmodels="clr-namespace:FoodTracker.ViewModels">
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" xmlns:viewmodels="clr-namespace:FoodTracker.ViewModels"
+            BackgroundColor="Transparent" >
     <ContentPage.BindingContext>
-        <viewmodels:AddViewModel>
-            
-        </viewmodels:AddViewModel>
+        <viewmodels:AddViewModel/>
+
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems >
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}"/>
@@ -42,7 +43,7 @@
                                     Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5" />
 
             <ScrollView Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5" >
-                    <Grid>
+                    <Grid BackgroundColor="Transparent">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="15"/>
                             <ColumnDefinition Width="auto"/>
@@ -108,7 +109,7 @@
 
                     <Entry ReturnCommand="{Binding AddContainsCommand}" ClearButtonVisibility="WhileEditing" ReturnType="Next" Placeholder="Contains" Text="{Binding Content}" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2"/>
                     <!--<Button Command="{Binding AddContainsCommand}" Text="Add" Grid.Column="5"  Grid.Row="16"/>-->
-                    <ImageButton Source="@android:drawable/Delete" Command="{Binding DeleteContainsCommand}" BackgroundColor="Black" Grid.Column="3" WidthRequest="1"  Grid.Row="17"/>
+                    <ImageButton Source="@android:drawable/Delete" Command="{Binding DeleteContainsCommand}" BackgroundColor="Transparent" Grid.Column="3" WidthRequest="1"  Grid.Row="17"/>
                     <Picker  ItemsSource="{Binding Item.contains}" SelectedItem="{Binding SelectedContent}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="17"/>
                     <Entry ReturnCommand="{Binding AddItemCommand}" Placeholder="healthnotes" Text="{Binding Item.healthnotes}" Grid.Column="1" Grid.Row="18" Grid.ColumnSpan="5"/>
                 </Grid>

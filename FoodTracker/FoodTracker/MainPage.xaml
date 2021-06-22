@@ -6,11 +6,11 @@
     <ContentPage.BindingContext>
         <viewmodels:MainPageViewModel/>
     </ContentPage.BindingContext>
-    <StackLayout BackgroundColor="White">
-        <Frame BackgroundColor="Black" Padding="24" CornerRadius="10">
-            <Label Text="Food tracker app" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+    <StackLayout BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
+        <Frame BackgroundColor="{AppThemeBinding Light=Black, Dark=White}" Padding="24" CornerRadius="10">
+            <Label x:Name="testlabel" Text="Food tracker app" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light=White, Dark=Black}" FontSize="36"/>
         </Frame>
-        <Grid BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center">
+        <Grid BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="auto"/>
@@ -29,5 +29,4 @@
             <Button Text="View all items" Command="{Binding OpenAllCommand}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
         </Grid>
     </StackLayout>
-
 </ContentPage>

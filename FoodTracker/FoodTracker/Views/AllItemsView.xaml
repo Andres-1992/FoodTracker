@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:FoodTracker.ViewModels" xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:FoodTracker.ViewModels" 
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="FoodTracker.Views.AllItemsView">
     <ContentPage.BindingContext>
         <viewmodels:AllItemsViewModel/>
@@ -15,11 +18,11 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
+                <RowDefinition Height="0"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="10"/>
+                <RowDefinition Height="0"/>
             </Grid.RowDefinitions>
             <zxing:ZXingScannerView  Grid.Row="1"                 
             IsVisible="{Binding IsVisible, Mode=TwoWay}"            
@@ -35,22 +38,28 @@
                     <Grid>
                
                 <CollectionView ItemsSource="{Binding Items}"
-                                BackgroundColor="White"
+                                BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"
                                 SelectedItem="{Binding SelectedItem}"
                                 SelectionMode="Single"
-                                ItemsLayout="VerticalList"
+                                ItemsLayout="VerticalList" 
                                 
                                 >
+                            <CollectionView.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectionChanged"
+                                                            Command="{Binding SelectCommand}"                                                            
+                                                            />
+                            </CollectionView.Behaviors>
                             <CollectionView.EmptyView>
-                                <StackLayout Padding="12">
-                                    <Label Text="No Items" HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="Black"/>
+                                <StackLayout Padding="50">
+                                    <Label Text="No Items" HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                                    <Label Text="Pull Down to Refresh" HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
                                 </StackLayout>
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate >
                         
                         <DataTemplate>
                             <Grid Padding="5">
-                                <Frame CornerRadius="10" HasShadow="True" BackgroundColor="Black" >
+                                        <Frame CornerRadius="10" HasShadow="True" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
                                     <StackLayout HorizontalOptions="FillAndExpand" >
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -68,20 +77,20 @@
 
                                                 </Grid.RowDefinitions>
 
-                                                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Text="{Binding name}" FontSize="Large" FontAttributes="Bold" TextColor="White" />
-                                                <Label Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="2" Text="{Binding brand}" FontSize="Small" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="End"/>
+                                                    <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Text="{Binding name}" FontSize="Large" FontAttributes="Bold" />
+                                                    <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="2" Text="{Binding brand}" FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="End"/>
 
                                                     <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                                                        <Label Text="{Binding energy}" FontSize="Medium" TextColor="White"   />
-                                                <Label Text="kcal" FontSize="Medium" TextColor="White"  />
+                                                        <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Text="{Binding energy}" FontSize="Medium"  />
+                                                        <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Text="kcal" FontSize="Medium"   />
                                                     </StackLayout>
                                                     <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-                                                        <Label Text="{Binding protein}" FontSize="Medium" TextColor="White"  />
-                                                        <Label Text="Protein" FontSize="Medium" TextColor="White"  />
+                                                        <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Text="{Binding protein}" FontSize="Medium"   />
+                                                        <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Text="Protein" FontSize="Medium"   />
                                                     </StackLayout>
                                                     <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="2" HorizontalOptions="End" >
-                                                        <Label Text="{Binding weight[0],Mode=TwoWay}" FontSize="Medium" TextColor="White"/>
-                                                <Label Text="{Binding weight[1],Mode=TwoWay}" FontSize="Medium" TextColor="White" />
+                                                        <Label TextColor="{AppThemeBinding Light=White, Dark=White}" Text="{Binding weight[0],Mode=TwoWay}" FontSize="Medium" />
+                                                        <Label TextColor="{AppThemeBinding Light=White, Dark=White}" Text="{Binding weight[1],Mode=TwoWay}" FontSize="Medium"  />
                                                         
                                                     </StackLayout>
 
