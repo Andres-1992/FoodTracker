@@ -156,7 +156,6 @@ namespace FoodTracker.ViewModels
             try
             {
                 item.ean = ScanResult;
-              //  item.contains = foodContentList;
                 isSuccessfull = await _rest.AddItem(item);
                 if (isSuccessfull)
                 {
@@ -166,7 +165,6 @@ namespace FoodTracker.ViewModels
                         contains = new ObservableCollection<string>()                        
                     };
                     ScanResult = "";
-                    //FoodContentList.Clear();
                 }
             }
             catch (Exception)

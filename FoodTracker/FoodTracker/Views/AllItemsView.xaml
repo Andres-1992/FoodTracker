@@ -4,12 +4,13 @@
              xmlns:viewmodels="clr-namespace:FoodTracker.ViewModels" 
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             x:Class="FoodTracker.Views.AllItemsView">
+             x:Class="FoodTracker.Views.AllItemsView" 
+            BackgroundColor="{AppThemeBinding Light={StaticResource WindowBackgroundColor}, Dark={StaticResource WindowBackgroundColorDark}}" >
     <ContentPage.BindingContext>
         <viewmodels:AllItemsViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="@android:drawable/camera2" Command="{Binding ToggleScanner}"/>
+        <ToolbarItem IconImageSource="{AppThemeBinding Dark={StaticResource CameraIconDark},Light={StaticResource CameraIconLight}}" Command="{Binding ToggleScanner}"/>
     </ContentPage.ToolbarItems>
 
 
@@ -34,15 +35,13 @@
             <ScrollView Grid.Row="3">
                 <RefreshView IsRefreshing="{Binding IsBusy}"
                              Command="{Binding RefreshCommand}"
-                         RefreshColor="Blue">
+                         RefreshColor="{StaticResource SystemBlue}">
                     <Grid>
                
-                <CollectionView ItemsSource="{Binding Items}"
-                                BackgroundColor="{AppThemeBinding Light=White, Dark=Black}"
+                <CollectionView 
+                                Style="{StaticResource ItemCollection}"
+                                ItemsSource="{Binding Items}"
                                 SelectedItem="{Binding SelectedItem}"
-                                SelectionMode="Single"
-                                ItemsLayout="VerticalList" 
-                                
                                 >
                             <CollectionView.Behaviors>
                                 <xct:EventToCommandBehavior EventName="SelectionChanged"
@@ -51,15 +50,15 @@
                             </CollectionView.Behaviors>
                             <CollectionView.EmptyView>
                                 <StackLayout Padding="50">
-                                    <Label Text="No Items" HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
-                                    <Label Text="Pull Down to Refresh" HorizontalOptions="CenterAndExpand" FontSize="Large" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                                    <Label Text="No Items" HorizontalOptions="CenterAndExpand" Style="{StaticResource LabelLarge}" />
+                                    <Label Text="Pull Down to Refresh" HorizontalOptions="CenterAndExpand" Style="{StaticResource LabelLarge}"/>
                                 </StackLayout>
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate >
                         
                         <DataTemplate>
                             <Grid Padding="5">
-                                        <Frame CornerRadius="10" HasShadow="True" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
+                                        <Frame Style="{StaticResource ItemCard}">
                                     <StackLayout HorizontalOptions="FillAndExpand" >
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -77,20 +76,20 @@
 
                                                 </Grid.RowDefinitions>
 
-                                                    <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Text="{Binding name}" FontSize="Large" FontAttributes="Bold" />
-                                                    <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="2" Text="{Binding brand}" FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+                                                    <Label Style="{StaticResource LabelLargeBold}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Text="{Binding name}"/>
+                                                    <Label Style="{StaticResource LabelSmallBold}" Grid.Row="0" Grid.Column="7" Grid.ColumnSpan="2" Text="{Binding brand}" HorizontalTextAlignment="End"/>
 
                                                     <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                                                        <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Text="{Binding energy}" FontSize="Medium"  />
-                                                        <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Text="kcal" FontSize="Medium"   />
+                                                        <Label Style="{StaticResource LabelMedium}" Text="{Binding energy}" />
+                                                        <Label Style="{StaticResource LabelMedium}" Text="kcal"/>
                                                     </StackLayout>
                                                     <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-                                                        <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Text="{Binding protein}" FontSize="Medium"   />
-                                                        <Label TextColor="{AppThemeBinding Light=Black, Dark=White}" Text="Protein" FontSize="Medium"   />
+                                                        <Label Style="{StaticResource LabelMedium}" Text="{Binding protein}"   />
+                                                        <Label Style="{StaticResource LabelMedium}" Text="Protein" />
                                                     </StackLayout>
                                                     <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="2" HorizontalOptions="End" >
-                                                        <Label TextColor="{AppThemeBinding Light=White, Dark=White}" Text="{Binding weight[0],Mode=TwoWay}" FontSize="Medium" />
-                                                        <Label TextColor="{AppThemeBinding Light=White, Dark=White}" Text="{Binding weight[1],Mode=TwoWay}" FontSize="Medium"  />
+                                                        <Label Style="{StaticResource LabelMedium}" Text="{Binding weight[0],Mode=TwoWay}" />
+                                                        <Label Style="{StaticResource LabelMedium}" Text="{Binding weight[1],Mode=TwoWay}" />
                                                         
                                                     </StackLayout>
 

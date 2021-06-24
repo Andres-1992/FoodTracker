@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:FoodTracker.ViewModels"
              x:Class="FoodTracker.MainPage"
-             x:DataType="viewmodels:MainPageViewModel">
+             x:DataType="viewmodels:MainPageViewModel" >
     <ContentPage.BindingContext>
         <viewmodels:MainPageViewModel/>
     </ContentPage.BindingContext>
-    <StackLayout BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
-        <Frame BackgroundColor="{AppThemeBinding Light=Black, Dark=White}" Padding="24" CornerRadius="10">
-            <Label x:Name="testlabel" Text="Food tracker app" HorizontalTextAlignment="Center" TextColor="{AppThemeBinding Light=White, Dark=Black}" FontSize="36"/>
+    <StackLayout BackgroundColor="{AppThemeBinding Light={StaticResource WindowBackgroundColor}, Dark={StaticResource WindowBackgroundColorDark}}">
+        <Frame BackgroundColor="{AppThemeBinding Light={StaticResource WindowBackgroundColor}, Dark={StaticResource WindowBackgroundColorDark}}"  CornerRadius="10" HasShadow="False">
+            <Label Style="{StaticResource LabelLargeBold}" Text="Food tracker app" HorizontalTextAlignment="Center" FontSize="36"/>
         </Frame>
         <Grid BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <Grid.ColumnDefinitions>

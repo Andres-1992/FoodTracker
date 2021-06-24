@@ -4,17 +4,19 @@
              
              x:Class="FoodTracker.Views.AddView"
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" xmlns:viewmodels="clr-namespace:FoodTracker.ViewModels"
-            BackgroundColor="Transparent" >
+            BackgroundColor="{AppThemeBinding Dark={StaticResource WindowBackgroundColorDark}, Light={StaticResource WindowBackgroundColor}}">
+    
     <ContentPage.BindingContext>
         <viewmodels:AddViewModel/>
-
     </ContentPage.BindingContext>
+
     <ContentPage.ToolbarItems >
-        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}"/>
+        <ToolbarItem IconImageSource="@android:drawable/AddIcon" Command="{Binding AddItemCommand}"/>
+
     </ContentPage.ToolbarItems>
     <StackLayout>
 
-            <Grid >
+        <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="15"/>
                     <ColumnDefinition Width="auto"/>
@@ -33,8 +35,8 @@
                 </Grid.RowDefinitions >
             <!--<Label Text="EAN" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" Grid.Row="1" Grid.Column="3"/>-->
 
-            <Entry Placeholder="EAN" Text="{Binding ScanResult}" Grid.Column="5" Grid.Row="1" ClearButtonVisibility="WhileEditing"/>
-            <ImageButton  Source="@android:drawable/camera2" Command="{Binding ToggleScannerCommand}"  Grid.Column="2" HeightRequest="40" WidthRequest="40"   Grid.Row="1"/>
+            <Entry Placeholder="EAN" Text="{Binding ScanResult}" Grid.Column="5" Grid.Row="1" Style="{StaticResource NextEntry}"/>
+            <ImageButton Style="{StaticResource DynamicCamera}" Command="{Binding ToggleScannerCommand}"  Grid.Column="2" HeightRequest="40" WidthRequest="40"   Grid.Row="1"/>
             <zxing:ZXingScannerView x:Name="Scanner"
                                     IsVisible="{Binding ScannerToggled,Mode=TwoWay}" 
                                     IsScanning="{Binding ScannerToggled}" 
@@ -76,42 +78,44 @@
                             <RowDefinition Height="15"/>
                         </Grid.RowDefinitions>
 
-                    <Entry ReturnType="Next" Placeholder="Name" Text="{Binding Item.name}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Entry ReturnType="Next" Placeholder="Brand" Text="{Binding Item.brand}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Energy" Grid.Column="1"  Grid.Row="3" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Energy" Text="{Binding Item.energy}" Grid.Row="3" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Carbs" Grid.Column="1"  Grid.Row="4" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Carbs" Text="{Binding Item.carbs}" Grid.Row="4" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Protein" Grid.Column="1"  Grid.Row="5" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Protein" Text="{Binding Item.protein}" Grid.Row="5" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Sodium" Grid.Column="1"  Grid.Row="6" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Sodium" Text="{Binding Item.sodium}" Grid.Row="6" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Fat" Grid.Column="1"  Grid.Row="7" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Fat" Text="{Binding Item.fat}" Grid.Row="7" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Satfat" Grid.Column="1"  Grid.Row="8" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Satfat" Text="{Binding Item.satfat}" Grid.Row="8" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
-                    <Label Text="Weight" Grid.Column="1"  Grid.Row="9" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Weight" Text="{Binding Weight}" Grid.Row="9" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
-                    <Picker ItemsSource="{Binding Measures}" SelectedItem="{Binding SelectedMeasure}"  Grid.Row="9" Grid.Column="3" WidthRequest="60" />
-                    <Label  Text="Sugar" Grid.Column="1"  Grid.Row="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Medium" />
-                    <Entry Keyboard="Numeric" ReturnType="Next" Placeholder="Sugar" Text="{Binding Item.sugar}" Grid.Row="10" Grid.Column="2"  ClearButtonVisibility="WhileEditing"/>
+                    <Entry Placeholder="Name" Text="{Binding Item.name}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Style="{StaticResource NextEntry}" />
+                    <Entry Placeholder="Brand" Text="{Binding Item.brand}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" Style="{StaticResource NextEntry}" />
 
-                        <Label  Grid.Column="1" Grid.Row="11" Text="Organic"  VerticalOptions="Center" />
-                    <CheckBox  IsChecked="{Binding Item.organic}" Grid.Column="2" Grid.Row="11" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Grid.Row="12" Text="Fairtrade" VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.fairtrade}" Grid.Column="2" Grid.Row="12" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Grid.Row="13" Text="Eco"  VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.eco}" Grid.Column="2" Grid.Row="13" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Grid.Row="14" Text="Vegetarian"  VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.vegetarian}" Grid.Column="2" Grid.Row="14" Grid.ColumnSpan="5" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Grid.Row="15" Text="Vegan"  VerticalOptions="Center"/>
-                    <CheckBox IsChecked="{Binding Item.vegan}" Grid.Column="2" Grid.Row="15" Grid.ColumnSpan="5" VerticalOptions="Center"/>
+                    <Label Text="Energy" Grid.Column="1"  Grid.Row="3" Style="{StaticResource LabelMediumCenter}" />
+                    <Entry Placeholder="Energy" Text="{Binding Item.energy}" Grid.Row="3" Grid.Column="2" Style="{StaticResource NumericEntry}"/>
+                    <Label Text="Carbs" Grid.Column="1"  Grid.Row="4" Style="{StaticResource LabelMediumCenter}" />
+                    <Entry Placeholder="Carbs" Text="{Binding Item.carbs}" Grid.Row="4" Grid.Column="2"  Style="{StaticResource NumericEntry}"/>
+                    <Label Text="Protein" Grid.Column="1"  Grid.Row="5" Style="{StaticResource LabelMediumCenter}" />
+                    <Entry Placeholder="Protein" Text="{Binding Item.protein}" Grid.Row="5" Grid.Column="2"  Style="{StaticResource NumericEntry}"/>
+                    <Label Text="Sodium" Grid.Column="1"  Grid.Row="6" Style="{StaticResource LabelMediumCenter}" />
+                    <Entry Placeholder="Sodium" Text="{Binding Item.sodium}" Grid.Row="6" Grid.Column="2"   Style="{StaticResource NumericEntry}"/>
+                    <Label Text="Fat" Grid.Column="1"  Grid.Row="7" Style="{StaticResource LabelMediumCenter}" />
+                    <Entry Placeholder="Fat" Text="{Binding Item.fat}" Grid.Row="7" Grid.Column="2"   Style="{StaticResource NumericEntry}"/>
+                    <Label Text="Satfat" Grid.Column="1"  Grid.Row="8" Style="{StaticResource LabelMediumCenter}"/>
+                    <Entry Placeholder="Satfat" Text="{Binding Item.satfat}" Grid.Row="8" Grid.Column="2"   Style="{StaticResource NumericEntry}"/>
+                    <Label Text="Weight" Grid.Column="1"  Grid.Row="9" Style="{StaticResource LabelMediumCenter}" />
+                    <Entry Placeholder="Weight" Text="{Binding Weight}" Grid.Row="9" Grid.Column="2"   Style="{StaticResource NumericEntry}"/>
+                    <Picker ItemsSource="{Binding Measures}" SelectedItem="{Binding SelectedMeasure}"  Grid.Row="9" Grid.Column="3" WidthRequest="100" Style="{StaticResource BasePicker}" />
+                    <Label Text="Sugar" Grid.Column="1"  Grid.Row="10" Style="{StaticResource LabelMediumCenter}" />
+                    <Entry Placeholder="Sugar" Text="{Binding Item.sugar}" Grid.Row="10" Grid.Column="2" Style="{StaticResource NumericEntry}"/>
 
-                    <Entry ReturnCommand="{Binding AddContainsCommand}" ClearButtonVisibility="WhileEditing" ReturnType="Next" Placeholder="Contains" Text="{Binding Content}" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2"/>
+                    <Label  Grid.Column="1" Grid.Row="11" Text="Organic"  Style="{StaticResource LabelMediumCenter}" />
+                    <CheckBox IsChecked="{Binding Item.organic}" Grid.Column="2" Grid.Row="11"  Style="{StaticResource CenterCheckBox}"/>
+                    <Label Grid.Column="1" Grid.Row="12" Text="Fairtrade" Style="{StaticResource LabelMediumCenter}"/>
+                    <CheckBox IsChecked="{Binding Item.fairtrade}" Grid.Column="2" Grid.Row="12" Style="{StaticResource CenterCheckBox}"/>
+                    <Label Grid.Column="1" Grid.Row="13" Text="Eco"  Style="{StaticResource LabelMediumCenter}"/>
+                    <CheckBox IsChecked="{Binding Item.eco}" Grid.Column="2" Grid.Row="13"  Style="{StaticResource CenterCheckBox}"/>
+                    <Label Grid.Column="1" Grid.Row="14" Text="Vegetarian"  Style="{StaticResource LabelMediumCenter}"/>
+                    <CheckBox IsChecked="{Binding Item.vegetarian}" Grid.Column="2" Grid.Row="14"  Style="{StaticResource CenterCheckBox}"/>
+                    <Label Grid.Column="1" Grid.Row="15" Text="Vegan"  Style="{StaticResource LabelMediumCenter}"/>
+                    <CheckBox IsChecked="{Binding Item.vegan}" Grid.Column="2" Grid.Row="15"  Style="{StaticResource CenterCheckBox}"/>
+
+                    <Entry ReturnCommand="{Binding AddContainsCommand}" PlaceholderColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                    Light={StaticResource TextColor}}" ClearButtonVisibility="WhileEditing" Placeholder="Contains" Text="{Binding Content}" Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2"/>
                     <!--<Button Command="{Binding AddContainsCommand}" Text="Add" Grid.Column="5"  Grid.Row="16"/>-->
-                    <ImageButton Source="@android:drawable/Delete" Command="{Binding DeleteContainsCommand}" BackgroundColor="Transparent" Grid.Column="3" WidthRequest="1"  Grid.Row="17"/>
-                    <Picker  ItemsSource="{Binding Item.contains}" SelectedItem="{Binding SelectedContent}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="17"/>
-                    <Entry ReturnCommand="{Binding AddItemCommand}" Placeholder="healthnotes" Text="{Binding Item.healthnotes}" Grid.Column="1" Grid.Row="18" Grid.ColumnSpan="5"/>
+                    <ImageButton Source="@android:drawable/DeleteIcon" Command="{Binding DeleteContainsCommand}" BackgroundColor="Transparent" Grid.Column="3"  Grid.Row="17"/>
+                    <Picker Style="{StaticResource BasePicker}" ItemsSource="{Binding Item.contains}" SelectedItem="{Binding SelectedContent}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="17"/>
+                    <Entry Placeholder="healthnotes" Text="{Binding Item.healthnotes}" Grid.Column="1" Grid.Row="18" Grid.ColumnSpan="5" Style="{StaticResource DoneEntry}"/>
                 </Grid>
                 
                 </ScrollView>
